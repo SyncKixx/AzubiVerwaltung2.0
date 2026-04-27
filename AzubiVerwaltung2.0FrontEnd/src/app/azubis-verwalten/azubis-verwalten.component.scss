@@ -1,0 +1,230 @@
+/* Das 3-Spalten-Layout */
+.verwaltung-container {
+  display: flex;
+  justify-content: space-between; /* Verteilt die Spalten: Links - Mitte - Rechts */
+  height: calc(100vh - 80px);
+  background-color: #f4f7f6;
+}
+
+/* Gemeinsames Design für beide Seitenleisten */
+.sidebar {
+  width: 280px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+/* Spezifische Ränder für die Trennung zur Mitte */
+.sidebar-left {
+  border-right: 1px solid #ddd;
+}
+.sidebar-right {
+  border-left: 1px solid #ddd;
+}
+
+/* Mittlerer Bereich nimmt den restlichen Platz ein */
+.content-area {
+  flex-grow: 1;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: auto;
+}
+
+/* --- DIE ANIMATIONEN --- */
+.slide-in-card {
+  background: white;
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Fliegt von LINKS in die Mitte (für Azubis) */
+.from-left {
+  animation: slideInFromLeft 0.4s ease-out forwards;
+}
+
+/* Fliegt von RECHTS in die Mitte (für Aufgaben) */
+.from-right {
+  animation: slideInFromRight 0.4s ease-out forwards;
+}
+
+@keyframes slideInFromLeft {
+  0% { transform: translateX(-50px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInFromRight {
+  0% { transform: translateX(50px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Macht die Listen schick (gleiches Design für beide) */
+.listen-style {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+.listen-style li {
+  padding: 12px;
+  margin-bottom: 8px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.listen-style li:hover { background: #e3f2fd; }
+.listen-style li.active { background: #007bff; color: white; font-weight: bold; }
+
+.btn-add {
+  margin-top: 15px;
+  padding: 12px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+/* --- FORMULAR STYLING --- */
+.form-container {
+  width: 100%;
+}
+
+/* Stapelt die Felder sauber untereinander */
+.form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Abstand und Schriftart für die Überschriften der Felder */
+.form-container label {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #444;
+  font-size: 14px;
+}
+
+/* Macht die Eingabefelder hübsch */
+.form-container input,
+.form-container select {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+  background-color: #fcfcfc;
+}
+
+/* Blauer Rahmen, wenn man reinklickt */
+.form-container input:focus,
+.form-container select:focus {
+  border-color: #007bff;
+  background-color: #fff;
+}
+
+/* --- BUTTONS IM FORMULAR --- */
+.form-container button {
+  margin-top: 25px;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* Der "Speichern"-Button */
+.form-container button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+}
+
+.form-container button[type="submit"]:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+/* Grauer Button, wenn noch Felder fehlen (Disabled-State) */
+.form-container button[type="submit"]:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Der "Abbrechen"-Button */
+.form-container button[type="button"] {
+  background-color: white;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  margin-top: 10px; /* Kleiner Abstand zum Speichern-Button */
+}
+
+.form-container button[type="button"]:hover {
+  background-color: #dc3545;
+  color: white;
+}
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Zwei Spalten */
+  gap: 10px;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox-item input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.checkbox-item label {
+  margin: 0 !important; /* Entfernt den Standard-Label-Abstand */
+  cursor: pointer;
+  font-weight: normal !important;
+}
+/* --- Der rote Löschen-Button --- */
+.btn-delete {
+  width: 100%; /* Zieht den Button elegant über die ganze Breite der Karte */
+  padding: 0.75rem 1rem;
+  background-color: #fef2f2; /* Sehr zartes Rot für den Hintergrund */
+  color: #dc2626;            /* Kräftiges Rot für den Text */
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  /* Falls du später noch ein Mülleimer-Icon einfügen willst, ist es hiermit schon zentriert */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  &:hover {
+    background-color: #fee2e2;
+    border-color: #f87171;
+    /* Ein sanfter, rötlicher Schatten beim Hovern */
+    box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.1), 0 2px 4px -1px rgba(239, 68, 68, 0.06);
+  }
+
+  &:active {
+    transform: translateY(1px); /* Klick-Effekt */
+    box-shadow: none;
+  }
+}

@@ -1,0 +1,134 @@
+<div class="verwaltung-container">
+
+  <div class="sidebar sidebar-left">
+    <h3>Azubis</h3>
+    <ul class="listen-style">
+      @for (azubi of azubis; track azubi.userId) {
+        <li (click)="selectAzubi(azubi)" [class.active]="selectedAzubi?.userId === azubi.userId">
+          {{ azubi.firstName }} {{ azubi.lastName }}
+        </li>
+      }
+    </ul>
+    <button class="btn-add" (click)="openAddAzubiMode()">+ Neuer Azubi</button>
+  </div>
+
+  <div class="content-area">
+
+    @if (isAddAzubiMode) {
+      <div class="slide-in-card from-left">
+        <h3>Neuen Azubi anlegen</h3>
+        <div class="form-container">
+          <form [formGroup]="azubiForm" (ngSubmit)="onSubmitAzubi()">
+          <label>Vorname:</label>
+          <input type="text" formControlName="firstName"> <label>Nachname:</label>
+          <input type="text" formControlName="lastName">  <label>E-Mail:</label>
+          <input type="email" formControlName="email">
+
+          <label>Rolle:</label>
+          <select formControlName="adminRights">
+            <option [ngValue]="false">Azubi</option>
+            <option [ngValue]="true">Admin</option>
+          </select>
+
+          <label>Passwort</label>
+          <input type="password" formControlName="passwordhash"> <button type="submit" [disabled]="azubiForm.invalid">Speichern</button>
+          <button type="button" (click)="isAddAzubiMode = false">Abbrechen</button>
+        </form>
+  </div>
+</div>
+}
+    @else if (selectedAzubi) {
+      <div class="slide-in-card from-left">
+        <h2>{{ selectedAzubi.firstName }} {{ selectedAzubi.lastName }}</h2>
+          <div class="details-box">
+            <p><strong>E-Mail:</strong> {{ selectedAzubi.email }}</p>
+            <p><strong>Rolle:</strong> {{ selectedAzubi.adminRights ? 'Admin' : 'Azubi' }}</p>
+            <p><strong>System-ID:</strong> {{ selectedAzubi.userId }}</p>
+          </div>
+          <div style="margin-top: 1.5rem;">
+            <button class="btn-delete" (click)="loescheAzubi(selectedAzubi.userId)">
+              Azubi entfernen
+            </button>
+          </div>
+        </div>
+    }
+
+    @else if (isAddDienstMode) {
+      <div class="slide-in-card from-right">
+        <h2>Neuen Dienst anlegen</h2>
+        <div class="form-container">
+          <form [formGroup]="dienstForm" (ngSubmit)="onSubmitDienst()">
+
+            <label>Bezeichnung:</label>
+            <input type="text" formControlName="bezeichnung">
+
+            <label>Beschreibung:</label>
+            <input type="text" formControlName="beschreibung">
+
+            <label>Intervall:</label>
+            <select formControlName="intervall">
+              <option [ngValue]="1">Täglich</option>
+              <option [ngValue]="2">Wöchentlich</option>
+              <option [ngValue]="3">Monatlich</option>
+            </select>
+
+            <label>Wochentage:</label>
+              <div class="checkbox-grid">
+              @for (tag of wochentageListe; track tag) {
+                <div class="checkbox-item">
+                <input type="checkbox"
+                [id]="tag"
+                (change)="onTagToggle(tag, $event)">
+      <label [for]="tag">{{ tag }}</label>
+    </div>
+  }
+</div>
+<input type="hidden" formControlName="wochentage">
+
+            <label>Icon:</label>
+            <input type="text" formControlName="icon" placeholder="Name des Icons">
+
+            <button type="submit" [disabled]="dienstForm.invalid">Speichern</button>
+            <button type="button" (click)="isAddDienstMode = false">Abbrechen</button>
+          </form>
+        </div>
+      </div>
+    }
+    @else if (selectedDienst) {
+      <div class="slide-in-card from-right">
+        <h2>{{ selectedDienst.bezeichnung }}</h2>
+        <div class="details-box">
+            <p><strong>Beschreibung:</strong> {{ selectedDienst.beschreibung }}</p>
+            <p><strong>Intervall:</strong> {{ selectedDienst.intervall }}</p>
+            <p><strong>Wochentage:</strong> {{ selectedDienst.wochentage }}</p>
+          </div>
+          <div style="margin-top: 1.5rem;">
+            <button class="btn-delete" (click)="loescheDienst(selectedDienst.id)">
+              Dienst entfernen
+            </button>
+          </div>
+      </div>
+    }
+
+    @else {
+      <div class="placeholder">
+      </div>
+    }
+
+  </div>
+
+  <div class="sidebar sidebar-right">
+    <h3>Dienste</h3>
+    <ul class="listen-style">
+      @for (dienst of dienste; track dienst.id) {
+        <li (click)="selectDienst(dienst)" [class.active]="selectedDienst?.id === dienst.id">
+          {{ dienst.bezeichnung }}
+        </li>
+      } @empty {
+        <li>Noch keine Dienste da.</li>
+      }
+    </ul>
+    <button class="btn-add" (click)="openAddDienstMode()">+ Neuer Dienst</button>
+  </div>
+
+</div>

@@ -1,0 +1,58 @@
+<div class="plan-container">
+  <div class="card">
+    <div class="card-header">
+      <h2>Mein Wochenplan</h2>
+      <p>Übersicht der zugeteilten Dienste für diese Woche</p>
+    </div>
+
+    <div class="table-responsive">
+      <table class="dienstplan-table">
+        <thead>
+          <tr>
+            <th class="sticky-col">Dienst / Aufgabe</th>
+            @for (tag of wochentage; track $index) {
+              <th>
+                <div class="date-header">
+                  <span class="day-name">{{ tag | date: 'EEEE' : '' : 'de' }}</span>
+                  <span class="day-date">{{ tag | date: 'dd.MM.' }}</span>
+                </div>
+              </th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (dienst of dienste; track dienst.id) {
+            <tr>
+              <td class="sticky-col dienst-info">
+                <strong>{{ dienst.bezeichnung }}</strong>
+                <small>{{ dienst.beschreibung }}</small>
+              </td>
+
+              @for (tag of wochentage; track $index) {
+                <td>
+                  @if (true) {
+
+                    @if (getZuweisungName(dienst.id, tag) !== '-- Frei --') {
+                      <div class="azubi-badge assigned">
+                        {{ getZuweisungName(dienst.id, tag) }}
+                      </div>
+                    } @else {
+                      <div class="azubi-badge free">
+                        -- Frei --
+                      </div>
+                    }
+
+                  } @else {
+                    <div class="tag-disabled">
+                      <span>Nicht nötig</span>
+                    </div>
+                  }
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

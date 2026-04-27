@@ -1,0 +1,65 @@
+.profil-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.profil-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+  .header {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    h2 { margin: 0; color: #2c3e50; }
+    p { margin: 5px 0 0; color: #7f8c8d; }
+  }
+}
+
+.dienste-liste {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  .dienst-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: #f0f7ff;
+    border-left: 4px solid #3498db;
+    border-radius: 4px;
+
+    .datum { font-weight: 600; color: #2980b9; }
+    .bezeichnung { color: #2c3e50; }
+  }
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+  label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+  input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    &:focus { border-color: #3498db; outline: none; }
+  }
+}
+
+.btn-save {
+  width: 100%;
+  padding: 0.75rem;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  &:hover { background: #219150; }
+}

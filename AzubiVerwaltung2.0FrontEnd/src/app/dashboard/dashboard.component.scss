@@ -1,0 +1,138 @@
+/* Kopiere hier den allgemeinen Table- und Container-Code aus der Admin-Komponente rein */
+/* ... (.plan-container, .card, .dienstplan-table etc.) ... */
+
+/* NEU: Styling für die statischen Namen */
+.azubi-badge {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+  font-weight: 500;
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+
+  &.assigned {
+    background-color: #e0f2fe; /* Zartes Blau */
+    color: #0284c7;            /* Dunkles Blau für Lesbarkeit */
+    border: 1px solid #bae6fd;
+  }
+
+  &.free {
+    background-color: #f8f9fa;
+    color: #a0aec0;
+    border: 1px dashed #cbd5e1;
+    font-style: italic;
+  }
+}
+
+.tag-disabled {
+  background-color: #f1f5f9;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px dashed #e2e8f0;
+
+  span {
+    font-style: italic;
+  }
+}
+.plan-container {
+  padding: 2rem;
+  background-color: #f8f9fa;
+  min-height: calc(100vh - 60px);
+
+  .card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+
+    .card-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid #eee;
+      h2 { margin: 0; color: #2c3e50; font-size: 1.5rem; }
+      p { margin: 5px 0 0; color: #7f8c8d; font-size: 0.9rem; }
+    }
+  }
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.dienstplan-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    background-color: #f4f6f8;
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 2px solid #dee2e6;
+
+    .date-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px; /* Macht eine kleine Lücke zwischen "Montag" und "20.04." */
+      .day-name { font-weight: bold; color: #333; }
+      .day-date { font-size: 0.8rem; color: #666; }
+    }
+  }
+
+  td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+  }
+
+  .dienst-info {
+    min-width: 200px;
+    background: #fff;
+    strong { display: block; color: #2c3e50; }
+    small { color: #95a5a6; font-size: 0.75rem; }
+  }
+}
+
+/* Styling für die statischen Namen (Badges) */
+.azubi-badge {
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+  font-weight: 600;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+
+  &.assigned {
+    background-color: #e0f2fe;
+    color: #0284c7;
+    border: 1px solid #bae6fd;
+  }
+
+  &.free {
+    background-color: #f8f9fa;
+    color: #94a3b8;
+    border: 1px dashed #cbd5e1;
+    font-style: italic;
+    font-weight: normal;
+  }
+}
+
+.tag-disabled {
+  background-color: #f1f5f9;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 0.6rem;
+  border-radius: 4px;
+  border: 1px dashed #e2e8f0;
+
+  span {
+    font-style: italic;
+  }
+}

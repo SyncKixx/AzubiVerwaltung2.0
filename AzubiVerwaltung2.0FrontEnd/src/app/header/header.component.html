@@ -1,0 +1,24 @@
+@if(authService.isLoggedIn()){
+<header class="navbar">
+  <div class="logo">
+    Azubi-Verwaltung
+  </div>
+    <nav class="nav-links">
+      <a routerLink="/profil" routerLinkActive="active">Profil</a>
+      <a routerLink="/dashboard" routerLinkActive="active">Wochenplan</a>
+
+      @if (authService.isAdmin()) {
+        <a routerLink="admin/diensteZuweisen" routerLinkActive="active">Dienste zuweisen</a>
+        <a routerLink="/admin/verwaltung" routerLinkActive="active">Azubis/Dienste verwalten</a>
+        <a routerLink="/admin/analyse" routerLinkActive="active">Analyse</a>
+      }
+    </nav>
+
+    <div class="user-actions">
+      <button class="btn-logout" (click)="authService.logout()">Abmelden</button>
+    </div>
+</header>
+}
+
+
+

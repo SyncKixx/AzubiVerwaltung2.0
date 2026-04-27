@@ -1,0 +1,19 @@
+<div class="analyse-grid">
+  @for (azubiStat of statistikDaten; track azubiStat.azubiName) {
+    <div class="azubi-card">
+      <div class="azubi-header">
+        <h3>{{ azubiStat.azubiName }}</h3>
+        <span class="badge">{{ azubiStat.gesamtAnzahl }} Dienste gesamt</span>
+      </div>
+
+      <ul class="dienst-liste">
+        @for (dienst of azubiStat.aufgabenAufteilung; track dienst.dienstName) {
+          <li>
+            <span class="dienst-name">{{ dienst.dienstName }}</span>
+            <span class="dienst-count">{{ dienst.anzahl }}x</span>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+</div>

@@ -1,0 +1,80 @@
+<div class="plan-container">
+  <div class="card">
+    <div class="card-header">
+      <h2>Wochenplan: Azubi-Dienste</h2>
+    </div>
+
+    <div class="plan-header-actions">
+      <div class="navigation">
+        <button (click)="navigiereWoche(-1)" class="btn-nav">◄ Vorherige Woche</button>
+        <button (click)="wochenOffset = 0; navigiereWoche(0)" class="btn-today">Heute</button>
+        <button (click)="navigiereWoche(1)" class="btn-nav">Nächste Woche ►</button>
+      </div>
+
+      <button
+        (click)="speichereGanzeWoche()"
+        class="btn-save"
+        [disabled]="geaenderteZuweisungen.size === 0">
+        Änderungen speichern ({{ geaenderteZuweisungen.size }})
+      </button>
+    </div>
+
+    <div class="table-responsive">
+      <table class="dienstplan-table">
+        <thead>
+          <tr>
+            <th class="sticky-col">Dienst / Aufgabe</th>
+           @for (tag of wochentage; track $index) {
+            <th>
+              <div class="date-header">
+                <span class="day-name">{{ tag | date: 'EEEE' : '' : 'de' }}</span>
+                <span class="day-date">{{ tag | date: 'dd.MM.' }}</span>
+              </div>
+            </th>
+}
+          </tr>
+        </thead>
+        <tbody>
+          @for (dienst of dienste; track dienst.id) {
+            <tr>
+              <td class="sticky-col dienst-info">
+                <strong>{{ dienst.bezeichnung }}</strong>
+                <small>{{ dienst.beschreibung }}</small>
+              </td>
+
+              @for (tag of wochentage; track $index) {
+                <td>
+                @if (isTagInDienstPlan(dienst.wochentage || dienst.Wochentage, tag)) {
+
+                    <select
+                    (change)="onZuweisungChangeLocal(dienst.id, tag, $event)"
+                    class="azubi-select"
+                    [class.assigned]="getZuweisung(dienst.id, tag)?.azubiId">
+
+                    <option value="" [selected]="!getZuweisung(dienst.id, tag)?.azubiId">
+                    -- Frei --
+                    </option>
+
+                    @for (azubi of azubis; track azubi.userId || $index) {
+                      <option
+                      [value]="azubi.userId"
+                      [selected]="azubi.userId == getZuweisung(dienst.id, tag)?.azubiId">
+                      {{ azubi.firstName }} {{ azubi.lastName }}
+                      </option>
+                    }
+                    </select>
+
+                  } @else {
+                    <div class="tag-disabled">
+                      <span>Nicht nötig</span>
+                    </div>
+                  }
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

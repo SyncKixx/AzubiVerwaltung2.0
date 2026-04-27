@@ -1,0 +1,37 @@
+<div class="bg-animation">
+    <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+    <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+    <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+    <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+    <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+</div>
+
+<div class="login-wrapper">
+    <div class="login-card">
+        <div class="login-header">
+            <h1>Azubi<span>Manager</span></h1>
+            <p>Willkommen zurück! Bitte logge dich ein.</p>
+        </div>
+
+        <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+            <div class="form-group">
+                <label for="email">E-Mail Adresse</label>
+                <input type="email" id="email" name="email" placeholder="name@firma.de" required [(ngModel)]="loginData.email" #email="ngModel">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Passwort</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required [(ngModel)]="loginData.password" #password="ngModel">
+            </div>
+
+            <button type="submit" class="btn-login" [disabled]="!loginForm.valid">Anmelden</button>
+
+            <div class="form-options">
+                <label class="remember-me">
+                  <input type="checkbox" name="rememberMe" [(ngModel)]="safeCredentials"> Zugangsdaten merken
+                </label>
+                <a href="#" class="forgot-link">Passwort vergessen?</a>
+            </div>
+        </form>
+    </div>
+</div>
