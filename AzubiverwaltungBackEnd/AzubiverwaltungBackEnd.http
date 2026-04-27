@@ -1,0 +1,6 @@
+@AzubiverwaltungBackEnd_HostAddress = http://localhost:5124
+
+GET {{AzubiverwaltungBackEnd_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,200 @@
+[
+  {
+    "ContainingType": "AzubiVerwaltungBackEnd.Controllers.AnalyseController",
+    "Method": "GetStatistik",
+    "RelativePath": "api/Analyse/getAnalyse",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AzubiVerwaltungBackEnd.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "AzubiVerwaltungBackEnd.Models.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AzubiController",
+    "Method": "CreateAzubi",
+    "RelativePath": "api/Azubi/addAzubi",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "neuerAzubi",
+        "Type": "AzubiVerwaltungBackEnd.Models.Azubi",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AzubiController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/Azubi/changePassword",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "AzubiVerwaltungBackEnd.DTO_s.ChangePasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AzubiController",
+    "Method": "GetAzubis",
+    "RelativePath": "api/Azubi/getAzubis",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AzubiVerwaltungBackEnd.Models.Azubi, AzubiverwaltungBackEnd, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AzubiController",
+    "Method": "SoftDeleteAzubi",
+    "RelativePath": "api/Azubi/softDelete/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AzubiverwaltungBackEnd.Controller.DiensteController",
+    "Method": "DeleteAufgabe",
+    "RelativePath": "api/Dienste/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AzubiverwaltungBackEnd.Controller.DiensteController",
+    "Method": "CreateAufgaben",
+    "RelativePath": "api/Dienste/addDienst",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newDienst",
+        "Type": "AzubiVerwaltungBackEnd.Models.Dienst",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AzubiVerwaltungBackEnd.Models.Dienst, AzubiverwaltungBackEnd, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AzubiverwaltungBackEnd.Controller.DiensteController",
+    "Method": "SoftDeleteDienst",
+    "RelativePath": "api/Dienste/deleteDienst/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AzubiverwaltungBackEnd.Controller.DiensteController",
+    "Method": "GetAufgaben",
+    "RelativePath": "api/Dienste/getDienste",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AzubiVerwaltungBackEnd.Models.Dienst, AzubiverwaltungBackEnd, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AzubiVerwaltungBackEnd.Controllers.ZuweisungController",
+    "Method": "GetPlan",
+    "RelativePath": "api/Zuweisung/getPlan",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AzubiVerwaltungBackEnd.Controllers.ZuweisungController",
+    "Method": "SaveBatch",
+    "RelativePath": "api/Zuweisung/saveZuweisung",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dtos",
+        "Type": "System.Collections.Generic.List\u00601[[AzubiverwaltungBackEnd.DTO_s.ZuweisungDto, AzubiverwaltungBackEnd, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
