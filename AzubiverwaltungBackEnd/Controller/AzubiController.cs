@@ -5,7 +5,6 @@ using AzubiVerwaltungBackEnd.Data;
 using AzubiVerwaltungBackEnd.Models;
 using AzubiVerwaltungBackEnd.DTO_s;
 
-[Authorize] // <--- Das ist Security Relevant
 [Route("api/[controller]")]
 [ApiController]
 public class AzubiController : ControllerBase
@@ -78,18 +77,7 @@ public class AzubiController : ControllerBase
 
         return Ok();
     }
-    [HttpPut("changePassword")]
-    public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto dto)
-    {
-        var azubi = await _context.Azubis.FindAsync(dto.UserId);
-        if (azubi == null) return NotFound("Benutzer nicht gefunden.");
-
-        azubi.passwordhash = BCrypt.Net.BCrypt.HashPassword(azubi.passwordhash);
-        azubi.passwordhash = dto.NewPassword;
-
-        await _context.SaveChangesAsync();
-        return Ok(new { message = "Passwort erfolgreich geändert" });
-    }
+    
 
 
 }

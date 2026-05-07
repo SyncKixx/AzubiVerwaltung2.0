@@ -1,4 +1,5 @@
 ﻿using AzubiVerwaltungBackEnd.Data;
+using AzubiVerwaltungBackEnd.DTO_s;
 using AzubiVerwaltungBackEnd.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -55,6 +56,18 @@ namespace AzubiVerwaltungBackEnd.Controllers
                 userId = user.UserId
             });
         }
+        [HttpPut("changePassword")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto dto)
+        {
+            var azubi = await _context.Azubis.FindAsync(dto.UserId);
+            if (azubi == null) return NotFound("Benutzer nicht gefunden.");
+
+            azubi.passwordhash = BCrypt.Net.BCrypt.HashPassword(azubi.passwordhash);
+            azubi.passwordhash = dto.NewPassword;
+
+            await _context.SaveChangesAsync();
+            return Ok(new { message = "Passwort erfolgreich geändert" });
+        }
         private string GenerateJwtToken(Azubi user)
         {
             var jwtSettings = _configuration.GetSection("Jwt");
@@ -68,6 +81,7 @@ namespace AzubiVerwaltungBackEnd.Controllers
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Name, user.FirstName),
                 new Claim("Admin", user.AdminRights ? "1" : "0"), // Eigener Claim für Rechte
+                new Claim(ClaimTypes.Role, user.AdminRights ? "Admin" : "User") //Claim für rechte Backend seitig
             };
 
             var token = new JwtSecurityToken(

@@ -1,0 +1,9 @@
+# Visual Studio Cache
+.vs/
+
+# C# Build-Ordner
+bin/
+obj/
+
+# Angular Module
+node_modules/

@@ -63,4 +63,7 @@ export class AuthService {
     const adminStatus = localStorage.getItem('is_admin') || sessionStorage.getItem('is_admin');
     return adminStatus === 'true';
   }
+  changePassword(azubiId: number, newPassword: string): Observable<any> {
+      return this.http.put<any>(`${this.apiUrl}/changePassword/${azubiId}`, { newPassword });
+    }
 }

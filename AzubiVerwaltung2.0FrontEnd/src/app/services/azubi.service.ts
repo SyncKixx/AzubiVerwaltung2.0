@@ -22,7 +22,5 @@ export class AzubiService {
   deleteAzubi(azubiId: number): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/softDelete/${azubiId}`, {});
   }
-  changePassword(azubiId: number, newPassword: string): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/changePassword/${azubiId}`, { newPassword });
-  }
+
 }

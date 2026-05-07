@@ -15,7 +15,7 @@ import { AzubiService } from '../services/azubi.service';
 export class ProfilComponent implements OnInit {
   username: string | null = '';
   meineDienste: any[] = [];
-
+  userId: number | null = null;
   passwordData = {
     newPassword: '',
     confirmPassword: ''
@@ -24,23 +24,41 @@ export class ProfilComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private zuweisungService: ZuweisungService,
-    private azubiService: AzubiService
   ) {}
 
   ngOnInit() {
-    this.username = localStorage.getItem('username') || sessionStorage.getItem('username');
+    this.username = localStorage.getItem('user_id') || sessionStorage.getItem('username');
+    this.userId = Number(localStorage.getItem('user_id')|| sessionStorage.getItem('user_id'));
     this.loadMeineDienste();
+    console.log(this.userId);
   }
 
-  loadMeineDienste() {
-    // Hier laden wir den Plan und filtern im Frontend nach dem eigenen Namen/ID
-    this.zuweisungService.getPlan().subscribe(alleZuweisungen => {
-      // Wir filtern nur die Dienste für diese Woche, wo unser Name/ID steht
-      this.meineDienste = alleZuweisungen.filter((z: any) =>
-        z.azubiName === this.username // Oder nach ID filtern
-      );
-    });
-  }
+loadMeineDienste() {
+  const heute = new Date();
+  heute.setHours(0, 0, 0, 0);
+
+  this.zuweisungService.getPlan().subscribe({
+    next: (alleZuweisungen) => {
+      this.meineDienste = alleZuweisungen.filter((z: any) => {
+        const azubiId = z.azubiId || z.AzubiId;
+        const datumBackend = z.datum || z.Datum;
+
+        if (!azubiId || !datumBackend) return false;
+
+        const isIdOk = Number(azubiId) === Number(this.userId);
+
+        const dDate = new Date(datumBackend);
+        dDate.setHours(0, 0, 0, 0);
+        const isHeute = dDate.getTime() === heute.getTime();
+
+        return isIdOk && isHeute;
+      });
+    },
+    error: (err) => {
+      console.error(err);
+    }
+  });
+}
 
   onChangePassword() {
     if (this.passwordData.newPassword !== this.passwordData.confirmPassword) {
@@ -51,7 +69,7 @@ export class ProfilComponent implements OnInit {
     // Wir holen uns die ID (Die solltest du im AuthService mit speichern!)
     const userId = Number(localStorage.getItem('user_id'));
 
-    this.azubiService.changePassword(userId, this.passwordData.newPassword).subscribe({
+    this.authService.changePassword(userId, this.passwordData.newPassword).subscribe({
       next: () => {
         alert("Passwort wurde erfolgreich geändert!");
         this.passwordData = { newPassword: '', confirmPassword: '' };

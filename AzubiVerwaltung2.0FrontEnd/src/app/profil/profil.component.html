@@ -7,15 +7,18 @@
     </div>
 
     <div class="dienste-liste">
-      @for (dienst of meineDienste; track dienst.id) {
-        <div class="dienst-item">
-          <span class="datum">{{ dienst.datum | date: 'EEEE, dd.MM.' : '' : 'de' }}</span>
-          <span class="bezeichnung">{{ dienst.dienstName }}</span>
-        </div>
-      } @empty {
-        <p class="empty-msg">Du hast diese Woche keine festen Dienste. Genieße die Freizeit!</p>
-      }
+  @for (dienstEintrag of meineDienste; track dienstEintrag.id) {
+    <div class="dienst-item">
+      <span class="datum">{{ dienstEintrag.datum | date: 'EEEE, dd.MM.' }}</span>
+
+      <span class="bezeichnung">
+        {{ dienstEintrag.dienst?.bezeichnung || dienstEintrag.dienst?.Bezeichnung }}
+      </span>
     </div>
+  } @empty {
+    <p>Keine Dienste für heute gefunden.</p>
+  }
+</div>
   </div>
 
   <div class="profil-card pw-section">
